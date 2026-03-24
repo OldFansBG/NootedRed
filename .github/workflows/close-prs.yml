@@ -3,14 +3,20 @@ name: Close Pull Request
 on:
   pull_request_target:
     types: [opened, reopened]
+  workflow_dispatch: # This adds the "Run workflow" button to your Actions tab
 
 jobs:
   run:
-    if: github.actor != 'dependabot[bot]' && github.actor != 'VisualEhrmanntraut'
+    # I commented out the line below so YOU can run it. 
+    # Remove the '#' later if you want to ignore your own PRs.
+    # if: github.actor != 'dependabot[bot]' && github.actor != 'VisualEhrmanntraut'
+    
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+      
     steps:
-      - uses: superbrothers/close-pull-request@v3
+      - name: Close Pull Request
+        uses: superbrothers/close-pull-request@v3
         with:
           comment: "We do not accept PRs. If you'd like to propose a change, please contact us at our Telegram supergroup."
